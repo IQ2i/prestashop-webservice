@@ -27,6 +27,11 @@
             "IQ2i\\PrestashopWebservice\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "IQ2i\\PrestashopWebservice\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.0-dev"
