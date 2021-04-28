@@ -1,0 +1,36 @@
+{
+    "name": "iq2i/prestashop-webservice",
+    "type": "library",
+    "description": "A PHP library that let you interact with PrestaShop API",
+    "keywords": ["php", "library", "prestashop", "webservice", "api"],
+    "homepage": "https://github.com/IQ2i/prestashop-webservice",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Loïc Sapone",
+            "email": "loic@sapone.fr"
+        }
+    ],
+    "require": {
+        "php": "^7.2.5|^8.0",
+        "symfony/http-client": "^4.4|^5.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "IQ2i\\PrestashopWebservice\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "phpstan/phpstan": "^0.12.84",
+        "symfony/phpunit-bridge": "^5.2"
+    }
+}
