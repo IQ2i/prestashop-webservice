@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+    mysql:
+        image: mysql/mysql-server:5.7
+        container_name: mysql
+        restart: on-failure
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=prestashop
+            - MYSQL_USER=prestashop
+            - MYSQL_PASSWORD=prestashop
+        volumes:
+            - ./mysql_data:/var/lib/mysql
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: phpmyadmin
+        restart: on-failure
+        ports:
+            - 8888:80
+        environment:
+            - PMA_HOST=mysql
+
+    prestashop:
+        image: prestashop/prestashop:1.7.7.5
+        container_name: prestashop
+        restart: on-failure
+        depends_on:
+            - mysql
+        ports:
+            - 8080:80
+        environment:
+            - DB_SERVER=mysql
+            - DB_NAME=prestashop
+            - DB_USER=prestashop
+            - DB_PASSWD=prestashop
+            - PS_ERASE_DB=1
+            - PS_INSTALL_DB=1
+            - PS_INSTALL_AUTO=1
+            - PS_FOLDER_ADMIN=backoffice
+            - PS_DOMAIN=localhost:8080
+        volumes:
+            - ./prestashop/init_scripts.sh:/tmp/post-install-scripts/init_scripts.sh
+            - ./prestashop/scripts:/var/www/html/custom-scripts
