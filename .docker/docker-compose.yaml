@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
     mysql:
@@ -41,5 +41,9 @@ services:
             - PS_FOLDER_ADMIN=backoffice
             - PS_DOMAIN=localhost:8080
         volumes:
-            - ./prestashop/init_scripts.sh:/tmp/post-install-scripts/init_scripts.sh
-            - ./prestashop/scripts:/var/www/html/custom-scripts
+            - ./prestashop/post-install-scripts:/tmp/post-install-scripts
+            - ./prestashop/custom-scripts:/var/www/html/custom-scripts
+        healthcheck:
+            test: curl -f http://localhost || exit 1
+            interval: 1m
+            retries: 5
