@@ -1,0 +1,12 @@
+<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+    <category>
+        <id>99</id>
+        <active>1</active>
+        <name>
+            <language id="1">Vintage clothes</language>
+        </name>
+        <link_rewrite>
+            <language id="1">vintage-clothes</language>
+        </link_rewrite>
+    </category>
+</prestashop>

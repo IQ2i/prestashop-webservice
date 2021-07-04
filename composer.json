@@ -12,8 +12,13 @@
         }
     ],
     "require": {
-        "php": "^7.2.5|^8.0",
-        "symfony/http-client": "^4.4|^5.0"
+        "php": "^7.2.5 || ^8.0",
+        "ext-curl": "*",
+        "ext-simplexml": "*",
+        "psr/log": "^1.1",
+        "symfony/http-client": "^4.4 || ^5.0",
+        "symfony/http-client-contracts": "^1.1.8 || ^2.0",
+        "symfony/serializer": "^4.4 || ^5.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

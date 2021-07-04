@@ -1,0 +1,11 @@
+<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+    <category>
+        <active>1</active>
+        <name>
+            <language id="1">Futuristic clothes</language>
+        </name>
+        <link_rewrite>
+            <language id="1">futuristic-clothes</language>
+        </link_rewrite>
+    </category>
+</prestashop>
