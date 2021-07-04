@@ -1,0 +1,20 @@
+variables:
+    php: docker exec -it -w /var/www/html prestashop_webservice_php
+
+commands:
+    start:
+        help: Start docker compose
+        steps:
+            - docker-compose -f .docker/docker-compose.yaml up -d
+
+    stop:
+        help: Stop docker compose
+        steps:
+            - docker-compose -f .docker/docker-compose.yaml stop
+
+    ci:
+        help: Run all quality jobs
+        steps:
+            - php ./vendor/bin/php-cs-fixer fix --no-ansi
+            - php ./vendor/bin/phpstan analyse
+            - php ./vendor/bin/simple-phpunit
