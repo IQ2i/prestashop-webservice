@@ -17,4 +17,4 @@ commands:
         steps:
             - php ./vendor/bin/php-cs-fixer fix --no-ansi
             - php ./vendor/bin/phpstan analyse
-            - php ./vendor/bin/simple-phpunit
+            - php ./vendor/bin/phpunit
