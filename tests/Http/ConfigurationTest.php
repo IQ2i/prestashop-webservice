@@ -21,7 +21,6 @@ class ConfigurationTest extends TestCase
 {
     private const OPTION_URL = 'https://my-domain.com/api';
     private const OPTION_KEY = '3FDXTL3PBBBUSBYLCPAMLAEF9E598PPS';
-    private const OPTION_DEBUG = true;
 
     public function testCreate()
     {
@@ -29,7 +28,6 @@ class ConfigurationTest extends TestCase
 
         $this->assertEquals(self::OPTION_URL, $configuration->get('url'));
         $this->assertEquals(self::OPTION_KEY, $configuration->get('key'));
-        $this->assertEquals(self::OPTION_DEBUG, $configuration->get('debug'));
     }
 
     public function testCreateWithMissingOption()

@@ -19,19 +19,14 @@ class Configuration
 {
     public const OPTION_URL = 'url';
     public const OPTION_KEY = 'key';
-    public const OPTION_DEBUG = 'debug';
 
     private const AVAILABLE_OPTIONS = [
         self::OPTION_URL   => true,
         self::OPTION_KEY   => true,
-        self::OPTION_DEBUG => true,
     ];
     private const REQUIRED_OPTIONS = [
         self::OPTION_URL => true,
         self::OPTION_KEY => true,
-    ];
-    private const DEFAULT_OPTIONS = [
-        self::OPTION_DEBUG => true,
     ];
 
     private $data = [];
@@ -47,7 +42,6 @@ class Configuration
         }
 
         $configuration = new self();
-        self::parseConfiguration($configuration, self::DEFAULT_OPTIONS);
         self::parseConfiguration($configuration, $options);
 
         return $configuration;
