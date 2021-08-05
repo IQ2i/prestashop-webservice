@@ -58,7 +58,7 @@ The response's content is an array, client automatically decode XML.
 
 ## Issues and feature requests
 
-Please report issues and request features at https://github.com/iq2i/data-importer/issues.
+Please report issues and request features at https://github.com/iq2i/prestashop-webservice/issues.
 
 ## License
 
