@@ -57,7 +57,7 @@ class Client
         $this->logger = $logger;
     }
 
-    public function list(?string $resource = '', array $headers = [], array $query = []): Response
+    public function list(string $resource = '', array $headers = [], array $query = []): Response
     {
         return $this->execute(new Request(
             'GET',
