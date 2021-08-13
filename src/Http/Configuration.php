@@ -38,9 +38,8 @@ class Configuration
         }
 
         $configuration = new self();
-        foreach ($options as $key => $value) {
-            $configuration->data[$key] = $value;
-        }
+        $configuration->data[self::OPTION_URL] = rtrim($options[self::OPTION_KEY],"/").'/';
+        $configuration->data[self::OPTION_KEY] = $options[self::OPTION_KEY];
 
         return $configuration;
     }
