@@ -14,6 +14,11 @@ declare(strict_types=1);
 namespace IQ2i\PrestashopWebservice\Tests\Http;
 
 use IQ2i\PrestashopWebservice\Http\Client;
+use IQ2i\PrestashopWebservice\Http\Request\CreateRequest;
+use IQ2i\PrestashopWebservice\Http\Request\DeleteRequest;
+use IQ2i\PrestashopWebservice\Http\Request\GetRequest;
+use IQ2i\PrestashopWebservice\Http\Request\ListRequest;
+use IQ2i\PrestashopWebservice\Http\Request\UpdateRequest;
 use PHPUnit\Framework\TestCase;
 
 class ClientTest extends TestCase
@@ -30,7 +35,8 @@ class ClientTest extends TestCase
 
     public function testList()
     {
-        $response = $this->client->list('categories');
+        $request = new ListRequest('categories');
+        $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
         $this->assertArrayHasKey('categories', $response->getContent());
@@ -39,7 +45,9 @@ class ClientTest extends TestCase
 
     public function testCreate()
     {
-        $response = $this->client->create('categories', file_get_contents(__DIR__.'/../fixtures/xml/create_category.xml'));
+        $request = (new CreateRequest('categories'))
+            ->setBody(file_get_contents(__DIR__.'/../fixtures/xml/create_category.xml'));
+        $response = $this->client->execute($request);
 
         $this->assertEquals('201', $response->getStatusCode());
 
@@ -49,7 +57,8 @@ class ClientTest extends TestCase
 
     public function testGet()
     {
-        $response = $this->client->get('categories', 2);
+        $request = new GetRequest('categories', 2);
+        $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
 
@@ -59,7 +68,9 @@ class ClientTest extends TestCase
 
     public function testUpdate()
     {
-        $response = $this->client->update('categories', 3, file_get_contents(__DIR__.'/../fixtures/xml/update_category.xml'));
+        $request = (new UpdateRequest('categories', 3))
+            ->setBody(file_get_contents(__DIR__.'/../fixtures/xml/update_category.xml'));
+        $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
 
@@ -69,7 +80,9 @@ class ClientTest extends TestCase
 
     public function testUpdateInvalidResource()
     {
-        $response = $this->client->update('categories', 99, file_get_contents(__DIR__.'/../fixtures/xml/update_invalid_resource.xml'));
+        $request = (new UpdateRequest('categories', 99))
+            ->setBody(file_get_contents(__DIR__.'/../fixtures/xml/update_invalid_resource.xml'));
+        $response = $this->client->execute($request);
 
         $this->assertEquals('404', $response->getStatusCode());
 
@@ -79,7 +92,8 @@ class ClientTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->client->delete('categories', 6);
+        $request = new DeleteRequest('categories', 2);
+        $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
 
@@ -89,7 +103,8 @@ class ClientTest extends TestCase
 
     public function testDeleteInvalidResource()
     {
-        $response = $this->client->delete('categories', 99);
+        $request = new DeleteRequest('categories', 99);
+        $response = $this->client->execute($request);
 
         $this->assertEquals('404', $response->getStatusCode());
 

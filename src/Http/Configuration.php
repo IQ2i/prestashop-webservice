@@ -38,7 +38,7 @@ class Configuration
         }
 
         $configuration = new self();
-        $configuration->data[self::OPTION_URL] = rtrim($options[self::OPTION_KEY],"/").'/';
+        $configuration->data[self::OPTION_URL] = rtrim($options[self::OPTION_URL], '/').'/';
         $configuration->data[self::OPTION_KEY] = $options[self::OPTION_KEY];
 
         return $configuration;

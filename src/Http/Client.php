@@ -15,6 +15,7 @@ namespace IQ2i\PrestashopWebservice\Http;
 
 use IQ2i\PrestashopWebservice\Exception\NetworkException;
 use IQ2i\PrestashopWebservice\Exception\SerializationException;
+use IQ2i\PrestashopWebservice\Http\Request\Request;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\HttpClient\HttpClient;
@@ -57,62 +58,62 @@ class Client
         $this->logger = $logger;
     }
 
-    public function list(string $resource = '', array $headers = [], array $query = []): Response
-    {
-        return $this->execute(new Request(
-            'GET',
-            $resource,
-            null,
-            $headers,
-            $query
-        ));
-    }
+//    public function list(string $resource = '', array $headers = [], array $query = []): Response
+//    {
+//        return $this->execute(new Request(
+//            'GET',
+//            $resource,
+//            null,
+//            $headers,
+//            $query
+//        ));
+//    }
+//
+//    public function create(string $resource, string $body = null, array $headers = [], array $query = []): Response
+//    {
+//        return $this->execute(new Request(
+//            'POST',
+//            $resource,
+//            $body,
+//            $headers,
+//            $query
+//        ));
+//    }
+//
+//    public function get(string $resource, int $identifier, array $headers = [], array $query = []): Response
+//    {
+//        return $this->execute(new Request(
+//            'GET',
+//            $resource.'/'.$identifier,
+//            null,
+//            $headers,
+//            $query
+//        ));
+//    }
+//
+//    public function update(string $resource, int $identifier, string $body = null, array $headers = [], array $query = []): Response
+//    {
+//        return $this->execute(new Request(
+//            'PUT',
+//            $resource.'/'.$identifier,
+//            $body,
+//            $headers,
+//            $query
+//        ));
+//    }
+//
+//    public function delete(string $resource, int $identifier, array $headers = [], array $query = []): Response
+//    {
+//        return $this->execute(new Request(
+//            'DELETE',
+//            $resource.'/'.$identifier,
+//            null,
+//            $headers,
+//            $query
+//        ));
+//    }
 
-    public function create(string $resource, string $body = null, array $headers = [], array $query = []): Response
-    {
-        return $this->execute(new Request(
-            'POST',
-            $resource,
-            $body,
-            $headers,
-            $query
-        ));
-    }
-
-    public function get(string $resource, int $identifier, array $headers = [], array $query = []): Response
-    {
-        return $this->execute(new Request(
-            'GET',
-            $resource.'/'.$identifier,
-            null,
-            $headers,
-            $query
-        ));
-    }
-
-    public function update(string $resource, int $identifier, string $body = null, array $headers = [], array $query = []): Response
-    {
-        return $this->execute(new Request(
-            'PUT',
-            $resource.'/'.$identifier,
-            $body,
-            $headers,
-            $query
-        ));
-    }
-
-    public function delete(string $resource, int $identifier, array $headers = [], array $query = []): Response
-    {
-        return $this->execute(new Request(
-            'DELETE',
-            $resource.'/'.$identifier,
-            null,
-            $headers,
-            $query
-        ));
-    }
-
-    private function execute(Request $request): Response
+    public function execute(Request $request): Response
     {
         try {
             $response = $this->httpClient->request(
