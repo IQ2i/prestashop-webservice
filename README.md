@@ -25,30 +25,53 @@ $client = new Client([
 ]);
 ```
 
-2. Perform CRUD request:
+2. Create CRUD request:
 
 ```php
+use IQ2i\PrestashopWebservice\Http\Request\ListRequest;
+
 /** GET /api/categories */
-$response = $client->list('categories');
-
-/** GET /api/categories/1 */
-$response = $client->get('categories', 1);
-
-/** POST /api/categories */
-$response = $client->create('categories', 'XML content');
-
-/** PUT /api/categories/1 */
-$response = $client->update('categories', 1, 'XML content');
-
-/** DELETE /api/categories/1 */
-$response = $client->list('categories', 1);
+$request = new ListRequest('categories');
 ```
 
-3. Use client's response:
+```php
+use IQ2i\PrestashopWebservice\Http\Request\GetRequest;
+
+/** GET /api/categories/1 */
+$request = new GetRequest('categories', 1);
+```
 
 ```php
-$response = $client->list('categories');
+use IQ2i\PrestashopWebservice\Http\Request\CreateRequest;
 
+/** POST /api/categories */
+$request = new CreateRequest('categories');
+$request->setBody('XML content');
+```
+
+```php
+use IQ2i\PrestashopWebservice\Http\Request\UpdateRequest;
+
+/** PUT /api/categories/1 */
+$request = new UpdateRequest('categories', 1);
+$request->setBody('XML content');
+```
+
+```php
+use IQ2i\PrestashopWebservice\Http\Request\DeleteRequest;
+
+/** DELETE /api/categories/1 */
+$request = new DeleteRequest('categories', 1);
+```
+
+3. Execute request
+```php
+$response = $client->execute($request);
+```
+
+4. Use client's response:
+
+```php
 $statusCode = $response->getStatusCode();
 $header = $response->getHeaders();
 $content = $response->getContent();
