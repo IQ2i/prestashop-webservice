@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace IQ2i\PrestashopWebservice\Http\Query;
+namespace IQ2i\PrestashopWebservice\Http\QueryAttribute;
 
 use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
 
-class Filter extends Attribute
+class Filter extends QueryAttribute
 {
     public const OR = 'or';
     public const INTERVAL = 'interval';

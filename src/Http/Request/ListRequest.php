@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Http\Request;
 
-use IQ2i\PrestashopWebservice\Http\Query\Display;
-use IQ2i\PrestashopWebservice\Http\Query\Filter;
-use IQ2i\PrestashopWebservice\Http\Query\Limit;
-use IQ2i\PrestashopWebservice\Http\Query\Sort;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Display;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Filter;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Limit;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Sort;
 
 class ListRequest extends Request
 {

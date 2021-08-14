@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Http\Request;
 
-use IQ2i\PrestashopWebservice\Http\Query\Display;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Display;
 
 class UpdateRequest extends Request
 {

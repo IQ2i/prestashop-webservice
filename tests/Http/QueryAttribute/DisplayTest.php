@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace IQ2i\PrestashopWebservice\Tests\Http\Query;
+namespace IQ2i\PrestashopWebservice\Tests\Http\QueryAttribute;
 
-use IQ2i\PrestashopWebservice\Http\Query\Display;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Display;
 use PHPUnit\Framework\TestCase;
 
 class DisplayTest extends TestCase

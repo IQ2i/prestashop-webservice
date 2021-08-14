@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace IQ2i\PrestashopWebservice\Http\Query;
+namespace IQ2i\PrestashopWebservice\Http\QueryAttribute;
 
 use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
 
-class Sort extends Attribute
+class Sort extends QueryAttribute
 {
     public const ASC = 'asc';
     public const DESC = 'desc';

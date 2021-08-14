@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace IQ2i\PrestashopWebservice\Http\Request;
 
 use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
-use IQ2i\PrestashopWebservice\Http\Query\Attribute;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\QueryAttribute;
 
 abstract class Request
 {
@@ -62,7 +62,7 @@ abstract class Request
         return $this->queryAttributes;
     }
 
-    public function addQueryAttribute(Attribute $queryAttribute): self
+    public function addQueryAttribute(QueryAttribute $queryAttribute): self
     {
         if (!in_array(get_class($queryAttribute), $this->getAvailableQueryAttributes())) {
             throw new InvalidArgument(sprintf('Forbidden %s query attribute in %s.', get_class($queryAttribute), __CLASS__));

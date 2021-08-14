@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace IQ2i\PrestashopWebservice\Http\Query;
+namespace IQ2i\PrestashopWebservice\Http\QueryAttribute;
 
-abstract class Attribute
+abstract class QueryAttribute
 {
     abstract public function getField(): string;
 

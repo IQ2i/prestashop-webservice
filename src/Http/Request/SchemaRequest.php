@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Http\Request;
 
-use IQ2i\PrestashopWebservice\Http\Query\Schema;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Schema;
 
 class SchemaRequest extends Request
 {

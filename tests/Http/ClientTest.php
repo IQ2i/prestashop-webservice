@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace IQ2i\PrestashopWebservice\Tests\Http;
 
 use IQ2i\PrestashopWebservice\Http\Client;
-use IQ2i\PrestashopWebservice\Http\Query\Schema;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Schema;
 use IQ2i\PrestashopWebservice\Http\Request\CreateRequest;
 use IQ2i\PrestashopWebservice\Http\Request\DeleteRequest;
 use IQ2i\PrestashopWebservice\Http\Request\GetRequest;

@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace IQ2i\PrestashopWebservice\Http\Query;
+namespace IQ2i\PrestashopWebservice\Http\QueryAttribute;
 
 use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
 
-class Schema extends Attribute
+class Schema extends QueryAttribute
 {
     public const BLANK = 'blank';
     public const SYNOPSIS = 'synopsis';
