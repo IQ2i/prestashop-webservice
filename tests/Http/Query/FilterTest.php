@@ -58,12 +58,12 @@ class FilterTest extends TestCase
     public function testUnknownOperator()
     {
         $this->expectException(InvalidArgument::class);
-        $filter = new Filter('name', 'John', 'wrongoperator');
+        new Filter('name', 'John', 'wrongoperator');
     }
 
     public function testWrongValueType()
     {
         $this->expectException(InvalidArgument::class);
-        $filter = new Filter('id', [1, 5], Filter::LITERAL);
+        new Filter('id', [1, 5], Filter::LITERAL);
     }
 }

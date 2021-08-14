@@ -28,6 +28,6 @@ class SchemaTest extends TestCase
     public function testUnknownType()
     {
         $this->expectException(InvalidArgument::class);
-        $schema = new Schema('wrongtype');
+        new Schema('wrongtype');
     }
 }

@@ -34,6 +34,6 @@ class SortTest extends TestCase
     public function testUnknownOrderBy()
     {
         $this->expectException(InvalidArgument::class);
-        $sort = new Sort(['field1' => 'test']);
+        new Sort(['field1' => 'test']);
     }
 }
