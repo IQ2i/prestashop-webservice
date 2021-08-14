@@ -12,7 +12,7 @@ A PHP client library to interact with PrestaShop API.
 composer require iq2i/prestashop-webservice
 ```
 
-## Usage
+## Basic usage
 
 1. Create a client instance:
 
@@ -25,7 +25,40 @@ $client = new Client([
 ]);
 ```
 
-2. Create CRUD request:
+2. Create a request:
+
+```php
+use IQ2i\PrestashopWebservice\Http\Request\GetRequest;
+
+/** GET /api/categories/1 */
+$request = new GetRequest('categories', 1);
+```
+
+3. Execute request
+```php
+$response = $client->execute($request);
+```
+
+4. Use client's response:
+
+```php
+$statusCode = $response->getStatusCode();
+$header = $response->getHeaders();
+$content = $response->getContent();
+```
+
+The response's content is an array, client automatically decode XML.
+
+## A request for each action
+
+```php
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Schema;
+use IQ2i\PrestashopWebservice\Http\Request\SchemaRequest;
+
+/** GET /api/categories?schema=synopsis */
+$request = new SchemaRequest('categories');
+$request->addQueryAttribute(new Schema(Schema::SYNOPSIS))
+```
 
 ```php
 use IQ2i\PrestashopWebservice\Http\Request\ListRequest;
@@ -64,20 +97,29 @@ use IQ2i\PrestashopWebservice\Http\Request\DeleteRequest;
 $request = new DeleteRequest('categories', 1);
 ```
 
-3. Execute request
+## Use query attributes
+
+PrestaShop defines list options for webservice: https://devdocs.prestashop.com/1.7/webservice/cheat-sheet/#list-options
+
+These options are available in this library:
+
 ```php
-$response = $client->execute($request);
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Schema;
+
+/** GET /api/categories?schema=synopsis */
+$request = new SchemaRequest('categories');
+$request->addQueryAttribute(new Schema(Schema::SYNOPSIS));
 ```
 
-4. Use client's response:
-
 ```php
-$statusCode = $response->getStatusCode();
-$header = $response->getHeaders();
-$content = $response->getContent();
-```
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Filter;
+use IQ2i\PrestashopWebservice\Http\QueryAttribute\Sort;
 
-The response's content is an array, client automatically decode XML.
+/** GET /api/categories?filter[name]=%[clothes]&sort=[name_ASC] */
+$request = new ListRequest('categories');
+$request->addQueryAttribute(new Filter('name', 'clothes', Filter::END));
+$request->addQueryAttribute(new Sort('name', Sort::ASC));
+```
 
 ## Issues and feature requests
 
