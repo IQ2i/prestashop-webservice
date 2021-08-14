@@ -15,13 +15,8 @@ namespace IQ2i\PrestashopWebservice\Http;
 
 class Response
 {
-    /** @var int */
     private $statusCode;
-
-    /** @var array */
     private $content;
-
-    /** @var array */
     private $headers;
 
     public function __construct(int $statusCode, array $content, array $headers = [])

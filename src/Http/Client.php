@@ -24,17 +24,11 @@ use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class Client
 {
-    /** @var Configuration */
     private $configuration;
-
-    /** @var HttpClientInterface */
     private $httpClient;
-
-    /** @var LoggerInterface */
     private $logger;
 
     public function __construct(array $options = [], ?HttpClientInterface $httpClient = null, ?LoggerInterface $logger = null)
@@ -58,61 +52,6 @@ class Client
         $this->logger = $logger;
     }
 
-//    public function list(string $resource = '', array $headers = [], array $query = []): Response
-//    {
-//        return $this->execute(new Request(
-//            'GET',
-//            $resource,
-//            null,
-//            $headers,
-//            $query
-//        ));
-//    }
-//
-//    public function create(string $resource, string $body = null, array $headers = [], array $query = []): Response
-//    {
-//        return $this->execute(new Request(
-//            'POST',
-//            $resource,
-//            $body,
-//            $headers,
-//            $query
-//        ));
-//    }
-//
-//    public function get(string $resource, int $identifier, array $headers = [], array $query = []): Response
-//    {
-//        return $this->execute(new Request(
-//            'GET',
-//            $resource.'/'.$identifier,
-//            null,
-//            $headers,
-//            $query
-//        ));
-//    }
-//
-//    public function update(string $resource, int $identifier, string $body = null, array $headers = [], array $query = []): Response
-//    {
-//        return $this->execute(new Request(
-//            'PUT',
-//            $resource.'/'.$identifier,
-//            $body,
-//            $headers,
-//            $query
-//        ));
-//    }
-//
-//    public function delete(string $resource, int $identifier, array $headers = [], array $query = []): Response
-//    {
-//        return $this->execute(new Request(
-//            'DELETE',
-//            $resource.'/'.$identifier,
-//            null,
-//            $headers,
-//            $query
-//        ));
-//    }
-
     public function execute(Request $request): Response
     {
         try {
@@ -134,20 +73,15 @@ class Client
             throw new NetworkException('Could not contact remote server.', 0, $e);
         }
 
-        return $this->parseResponse($response);
-    }
-
-    private function parseResponse(ResponseInterface $response): Response
-    {
         try {
             $statusCode = $response->getStatusCode();
         } catch (TransportExceptionInterface $e) {
             throw new NetworkException('Could not contact remote server.', 0, $e);
         }
 
-        try {
-            $content = $response->getContent(false);
+        $content = $response->getContent(false);
 
+        try {
             $data = [];
             if (!empty($content)) {
                 $serializer = new Serializer([], [new XmlEncoder()]);
