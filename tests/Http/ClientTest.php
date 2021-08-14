@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace IQ2i\PrestashopWebservice\Tests\Http;
 
 use IQ2i\PrestashopWebservice\Http\Client;
+use IQ2i\PrestashopWebservice\Http\Query\Schema;
 use IQ2i\PrestashopWebservice\Http\Request\CreateRequest;
 use IQ2i\PrestashopWebservice\Http\Request\DeleteRequest;
 use IQ2i\PrestashopWebservice\Http\Request\GetRequest;
 use IQ2i\PrestashopWebservice\Http\Request\ListRequest;
+use IQ2i\PrestashopWebservice\Http\Request\SchemaRequest;
 use IQ2i\PrestashopWebservice\Http\Request\UpdateRequest;
 use PHPUnit\Framework\TestCase;
 
@@ -33,14 +35,29 @@ class ClientTest extends TestCase
         ]);
     }
 
+    public function testSchema()
+    {
+        $request = (new SchemaRequest('categories'))
+            ->addQueryAttribute(new Schema(Schema::SYNOPSIS));
+        $response = $this->client->execute($request);
+
+        $this->assertEquals('200', $response->getStatusCode());
+        $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
+
+        $content = $response->getContent();
+        $this->assertEquals('true', $content['category']['name']['@required']);
+    }
+
     public function testList()
     {
         $request = new ListRequest('categories');
         $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
-        $this->assertArrayHasKey('categories', $response->getContent());
         $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
+
+        $content = $response->getContent();
+        $this->assertArrayHasKey('categories', $content);
     }
 
     public function testCreate()
@@ -50,6 +67,7 @@ class ClientTest extends TestCase
         $response = $this->client->execute($request);
 
         $this->assertEquals('201', $response->getStatusCode());
+        $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
 
         $content = $response->getContent();
         $this->assertEquals('Futuristic clothes', $content['category']['name']['language']['#']);
@@ -61,6 +79,7 @@ class ClientTest extends TestCase
         $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
+        $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
 
         $content = $response->getContent();
         $this->assertEquals('Home', $content['category']['name']['language']['#']);
@@ -73,6 +92,7 @@ class ClientTest extends TestCase
         $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
+        $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
 
         $content = $response->getContent();
         $this->assertEquals('Vintage clothes', $content['category']['name']['language']['#']);
@@ -85,6 +105,7 @@ class ClientTest extends TestCase
         $response = $this->client->execute($request);
 
         $this->assertEquals('404', $response->getStatusCode());
+        $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
 
         $content = $response->getContent();
         $this->assertEquals('Invalid ID', $content['errors']['error']['message']);
@@ -96,6 +117,7 @@ class ClientTest extends TestCase
         $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
+        $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
 
         $content = $response->getContent();
         $this->assertEquals([], $content);
@@ -107,6 +129,7 @@ class ClientTest extends TestCase
         $response = $this->client->execute($request);
 
         $this->assertEquals('404', $response->getStatusCode());
+        $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
 
         $content = $response->getContent();
         $this->assertEquals('Id(s) not exists: 99', $content['errors']['error']['message']);
