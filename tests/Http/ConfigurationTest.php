@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigurationTest extends TestCase
 {
-    private const OPTION_URL = 'https://my-domain.com/api';
+    private const OPTION_URL = 'https://my-domain.com/api/';
     private const OPTION_KEY = '3FDXTL3PBBBUSBYLCPAMLAEF9E598PPS';
 
     public function testCreate()

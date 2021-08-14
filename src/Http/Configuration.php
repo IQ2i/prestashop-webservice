@@ -24,54 +24,44 @@ class Configuration
         self::OPTION_URL   => true,
         self::OPTION_KEY   => true,
     ];
-    private const REQUIRED_OPTIONS = [
-        self::OPTION_URL => true,
-        self::OPTION_KEY => true,
-    ];
 
     private $data = [];
 
     public static function create(array $options): self
     {
-        if (0 < \count($invalidOptions = \array_diff_key($options, self::AVAILABLE_OPTIONS))) {
-            throw new InvalidArgument(\sprintf('Unknown option(s) "%s" passed to "%s::%s". ', \implode('", "', \array_keys($invalidOptions)), __CLASS__, __METHOD__));
+        if (0 < count($invalidOptions = array_diff_key($options, self::AVAILABLE_OPTIONS))) {
+            throw new InvalidArgument(sprintf('Unknown option(s) "%s".', implode('", "', array_keys($invalidOptions))));
         }
 
-        if (0 < \count($missingOptions = \array_diff_key(self::REQUIRED_OPTIONS, $options))) {
-            throw new InvalidArgument(\sprintf('Missing required option(s) "%s" passed to "%s::%s". ', \implode('", "', \array_keys($missingOptions)), __CLASS__, __METHOD__));
+        if (0 < count($missingOptions = array_diff_key(self::AVAILABLE_OPTIONS, $options))) {
+            throw new InvalidArgument(sprintf('Missing required option(s) "%s".', implode('", "', array_keys($missingOptions))));
         }
 
         $configuration = new self();
-        self::parseConfiguration($configuration, $options);
+        $configuration->data[self::OPTION_URL] = rtrim($options[self::OPTION_URL], '/').'/';
+        $configuration->data[self::OPTION_KEY] = $options[self::OPTION_KEY];
 
         return $configuration;
     }
 
     /**
-     * @return null|mixed
+     * @return mixed
      */
     public function get(string $name)
     {
         if (!isset(self::AVAILABLE_OPTIONS[$name])) {
-            throw new InvalidArgument(\sprintf('Invalid option "%s" passed to "%s::%s". ', $name, __CLASS__, __METHOD__));
+            throw new InvalidArgument(sprintf('Unknown option "%s".', $name));
         }
 
-        return $this->data[$name] ?? null;
+        return $this->data[$name];
     }
 
     public function has(string $name): bool
     {
         if (!isset(self::AVAILABLE_OPTIONS[$name])) {
-            throw new InvalidArgument(\sprintf('Invalid option "%s" passed to "%s::%s". ', $name, __CLASS__, __METHOD__));
+            throw new InvalidArgument(sprintf('Unknown option "%s".', $name));
         }
 
         return isset($this->data[$name]);
-    }
-
-    private static function parseConfiguration(Configuration $configuration, array $options)
-    {
-        foreach ($options as $key => $value) {
-            $configuration->data[$key] = $value;
-        }
     }
 }
