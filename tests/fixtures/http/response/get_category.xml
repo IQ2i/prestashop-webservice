@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+    <category>
+        <id><![CDATA[2]]></id>
+        <id_parent xlink:href="http://localhost:8080/api/categories/1"><![CDATA[1]]></id_parent>
+        <level_depth><![CDATA[1]]></level_depth>
+        <nb_products_recursive notFilterable="true"><![CDATA[19]]></nb_products_recursive>
+        <active><![CDATA[1]]></active>
+        <id_shop_default><![CDATA[1]]></id_shop_default>
+        <is_root_category><![CDATA[1]]></is_root_category>
+        <position><![CDATA[0]]></position>
+        <date_add><![CDATA[2022-01-10 11:12:06]]></date_add>
+        <date_upd><![CDATA[2022-01-10 11:12:06]]></date_upd>
+        <name><language id="1" xlink:href="http://localhost:8080/api/languages/1"><![CDATA[Home]]></language></name>
+        <link_rewrite><language id="1" xlink:href="http://localhost:8080/api/languages/1"><![CDATA[home]]></language></link_rewrite>
+        <description><language id="1" xlink:href="http://localhost:8080/api/languages/1"><![CDATA[]]></language></description>
+        <meta_title><language id="1" xlink:href="http://localhost:8080/api/languages/1"><![CDATA[]]></language></meta_title>
+        <meta_description><language id="1" xlink:href="http://localhost:8080/api/languages/1"><![CDATA[]]></language></meta_description>
+        <meta_keywords><language id="1" xlink:href="http://localhost:8080/api/languages/1"><![CDATA[]]></language></meta_keywords>
+        <associations>
+            <categories nodeType="category" api="categories">
+                <category xlink:href="http://localhost:8080/api/categories/3">
+                    <id><![CDATA[3]]></id>
+                </category>
+                <category xlink:href="http://localhost:8080/api/categories/6">
+                    <id><![CDATA[6]]></id>
+                </category>
+                <category xlink:href="http://localhost:8080/api/categories/9">
+                    <id><![CDATA[9]]></id>
+                </category>
+            </categories>
+            <products nodeType="product" api="products">
+                <product xlink:href="http://localhost:8080/api/products/1">
+                    <id><![CDATA[1]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/2">
+                    <id><![CDATA[2]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/3">
+                    <id><![CDATA[3]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/4">
+                    <id><![CDATA[4]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/5">
+                    <id><![CDATA[5]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/6">
+                    <id><![CDATA[6]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/7">
+                    <id><![CDATA[7]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/8">
+                    <id><![CDATA[8]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/9">
+                    <id><![CDATA[9]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/10">
+                    <id><![CDATA[10]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/11">
+                    <id><![CDATA[11]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/12">
+                    <id><![CDATA[12]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/13">
+                    <id><![CDATA[13]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/14">
+                    <id><![CDATA[14]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/15">
+                    <id><![CDATA[15]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/16">
+                    <id><![CDATA[16]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/17">
+                    <id><![CDATA[17]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/18">
+                    <id><![CDATA[18]]></id>
+                </product>
+                <product xlink:href="http://localhost:8080/api/products/19">
+                    <id><![CDATA[19]]></id>
+                </product>
+            </products>
+        </associations>
+    </category>
+</prestashop>

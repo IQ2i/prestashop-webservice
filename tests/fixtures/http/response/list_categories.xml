@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+    <categories>
+        <category id="1" xlink:href="http://localhost:8080/api/categories/1"/>
+        <category id="2" xlink:href="http://localhost:8080/api/categories/2"/>
+        <category id="3" xlink:href="http://localhost:8080/api/categories/3"/>
+        <category id="4" xlink:href="http://localhost:8080/api/categories/4"/>
+        <category id="5" xlink:href="http://localhost:8080/api/categories/5"/>
+        <category id="6" xlink:href="http://localhost:8080/api/categories/6"/>
+        <category id="7" xlink:href="http://localhost:8080/api/categories/7"/>
+        <category id="8" xlink:href="http://localhost:8080/api/categories/8"/>
+        <category id="9" xlink:href="http://localhost:8080/api/categories/9"/>
+    </categories>
+</prestashop>

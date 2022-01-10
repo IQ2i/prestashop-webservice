@@ -22,6 +22,7 @@ use IQ2i\PrestashopWebservice\Http\Request\ListRequest;
 use IQ2i\PrestashopWebservice\Http\Request\SchemaRequest;
 use IQ2i\PrestashopWebservice\Http\Request\UpdateRequest;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\MockHttpClient;
 
 class ClientTest extends TestCase
 {
@@ -29,10 +30,10 @@ class ClientTest extends TestCase
 
     public function setUp(): void
     {
-        $this->client = new Client([
-            'url' => 'http://localhost:8080/api/',
-            'key' => '6MBWZM37S6XCZXYT81GD6XD41SKZ14TP',
-        ]);
+        $this->client = new Client(
+            ['url' => '', 'key' => ''],
+            new MockHttpClient(new MockClientCallback())
+        );
     }
 
     public function testSchema()
@@ -63,7 +64,7 @@ class ClientTest extends TestCase
     public function testCreate()
     {
         $request = (new CreateRequest('categories'))
-            ->setBody(file_get_contents(__DIR__.'/../fixtures/xml/create_category.xml'));
+            ->setBody(file_get_contents(__DIR__ . '/../fixtures/http/request/create_category.xml'));
         $response = $this->client->execute($request);
 
         $this->assertEquals('201', $response->getStatusCode());
@@ -87,8 +88,8 @@ class ClientTest extends TestCase
 
     public function testUpdate()
     {
-        $request = (new UpdateRequest('categories', 3))
-            ->setBody(file_get_contents(__DIR__.'/../fixtures/xml/update_category.xml'));
+        $request = (new UpdateRequest('categories', 10))
+            ->setBody(file_get_contents(__DIR__ . '/../fixtures/http/request/update_category.xml'));
         $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
@@ -101,7 +102,7 @@ class ClientTest extends TestCase
     public function testUpdateInvalidResource()
     {
         $request = (new UpdateRequest('categories', 99))
-            ->setBody(file_get_contents(__DIR__.'/../fixtures/xml/update_invalid_resource.xml'));
+            ->setBody(file_get_contents(__DIR__ . '/../fixtures/http/request/update_invalid_resource.xml'));
         $response = $this->client->execute($request);
 
         $this->assertEquals('404', $response->getStatusCode());
@@ -113,7 +114,7 @@ class ClientTest extends TestCase
 
     public function testDelete()
     {
-        $request = new DeleteRequest('categories', 2);
+        $request = new DeleteRequest('categories', 10);
         $response = $this->client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());

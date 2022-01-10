@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+    <errors>
+        <error>
+            <code>
+                <![CDATA[87]]>
+            </code>
+            <message>
+                <![CDATA[Id(s) not exists: 99]]>
+            </message>
+        </error>
+    </errors>
+</prestashop>
