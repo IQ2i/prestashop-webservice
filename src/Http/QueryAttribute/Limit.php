@@ -15,13 +15,10 @@ namespace IQ2i\PrestashopWebservice\Http\QueryAttribute;
 
 class Limit extends QueryAttribute
 {
-    private $number;
-    private $index;
-
-    public function __construct(int $number, int $index = null)
-    {
-        $this->number = $number;
-        $this->index = $index;
+    public function __construct(
+        private int $number,
+        private ?int $index = null
+    ) {
     }
 
     public function getField(): string

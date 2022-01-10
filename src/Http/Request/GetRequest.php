@@ -17,13 +17,10 @@ use IQ2i\PrestashopWebservice\Http\QueryAttribute\Display;
 
 class GetRequest extends Request
 {
-    private $resource;
-    private $identifier;
-
-    public function __construct(string $resource, int $identifier)
-    {
-        $this->resource = $resource;
-        $this->identifier = $identifier;
+    public function __construct(
+        private string $resource,
+        private int $identifier
+    ) {
     }
 
     public function getMethod(): string

@@ -27,9 +27,9 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Client
 {
-    private $configuration;
-    private $httpClient;
-    private $logger;
+    private Configuration $configuration;
+    private HttpClientInterface $httpClient;
+    private LoggerInterface $logger;
 
     public function __construct(array $options = [], ?HttpClientInterface $httpClient = null, ?LoggerInterface $logger = null)
     {

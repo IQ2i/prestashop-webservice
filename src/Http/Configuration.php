@@ -25,7 +25,7 @@ class Configuration
         self::OPTION_KEY   => true,
     ];
 
-    private $data = [];
+    private array $data = [];
 
     public static function create(array $options): self
     {
@@ -44,10 +44,7 @@ class Configuration
         return $configuration;
     }
 
-    /**
-     * @return mixed
-     */
-    public function get(string $name)
+    public function get(string $name): mixed
     {
         if (!isset(self::AVAILABLE_OPTIONS[$name])) {
             throw new InvalidArgument(sprintf('Unknown option "%s".', $name));

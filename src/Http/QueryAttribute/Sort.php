@@ -25,15 +25,12 @@ class Sort extends QueryAttribute
         self::DESC,
     ];
 
-    private $fields;
-
-    public function __construct(array $fields)
-    {
+    public function __construct(
+        private array $fields
+    ) {
         if (0 < count($invalidOrderBys = array_diff(array_values($fields), self::AVAILABLE_ORDER_BY))) {
             throw new InvalidArgument(sprintf('Unknown order by(s) `%s`.', implode('`, `', array_keys($invalidOrderBys))));
         }
-
-        $this->fields = $fields;
     }
 
     public function getField(): string

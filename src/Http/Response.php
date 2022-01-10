@@ -15,15 +15,11 @@ namespace IQ2i\PrestashopWebservice\Http;
 
 class Response
 {
-    private $statusCode;
-    private $content;
-    private $headers;
-
-    public function __construct(int $statusCode, array $content, array $headers = [])
-    {
-        $this->statusCode = $statusCode;
-        $this->content = $content;
-        $this->headers = $headers;
+    public function __construct(
+        private int $statusCode,
+        private array $content,
+        private array $headers = []
+    ) {
     }
 
     public function getStatusCode(): int
