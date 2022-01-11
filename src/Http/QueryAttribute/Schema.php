@@ -25,15 +25,12 @@ class Schema extends QueryAttribute
         self::SYNOPSIS,
     ];
 
-    private $type;
-
-    public function __construct(string $type)
-    {
+    public function __construct(
+        private string $type
+    ) {
         if (!in_array($type, self::AVAILABLE_TYPES)) {
             throw new InvalidArgument(sprintf('Unknown schema type %s.', $type));
         }
-
-        $this->type = $type;
     }
 
     public function getField(): string

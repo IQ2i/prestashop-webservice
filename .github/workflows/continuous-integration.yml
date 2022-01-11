@@ -14,19 +14,13 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php-version: ['7.2.5', '7.3', '7.4', '8.0', '8.1']
+                php-version: ['8.0', '8.1']
 
         steps:
             - name: Checkout
               uses: actions/checkout@v2
               with:
                   fetch-depth: 2
-
-            - name: Docker run container
-              run: docker-compose -f .docker/docker-compose.yaml up -d
-
-            - name: Wait for PresaShop container
-              run: ./.github/workflows/scripts/docker-inspect.sh prestashop 180
 
             - name: Install PHP
               uses: shivammathur/setup-php@v2

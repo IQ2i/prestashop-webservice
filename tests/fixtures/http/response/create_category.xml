@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+    <category>
+        <id>
+            <![CDATA[10]]>
+        </id>
+        <id_parent></id_parent>
+        <level_depth>
+            <![CDATA[0]]>
+        </level_depth>
+        <nb_products_recursive notFilterable="true">
+            <![CDATA[-1]]>
+        </nb_products_recursive>
+        <active>
+            <![CDATA[1]]>
+        </active>
+        <id_shop_default>
+            <![CDATA[1]]>
+        </id_shop_default>
+        <is_root_category>
+            <![CDATA[]]>
+        </is_root_category>
+        <position>
+            <![CDATA[]]>
+        </position>
+        <date_add>
+            <![CDATA[2022-01-10 11:33:31]]>
+        </date_add>
+        <date_upd>
+            <![CDATA[2022-01-10 11:33:31]]>
+        </date_upd>
+        <name>
+            <language id="1" xlink:href="http://localhost:8080/api/languages/1">
+                <![CDATA[Futuristic clothes]]>
+            </language>
+        </name>
+        <link_rewrite>
+            <language id="1" xlink:href="http://localhost:8080/api/languages/1">
+                <![CDATA[futuristic-clothes]]>
+            </language>
+        </link_rewrite>
+        <description>
+            <language id="1"></language>
+        </description>
+        <meta_title>
+            <language id="1"></language>
+        </meta_title>
+        <meta_description>
+            <language id="1"></language>
+        </meta_description>
+        <meta_keywords>
+            <language id="1"></language>
+        </meta_keywords>
+        <associations>
+            <categories nodeType="category" api="categories"/>
+            <products nodeType="product" api="products"/>
+        </associations>
+    </category>
+</prestashop>

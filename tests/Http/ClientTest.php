@@ -22,24 +22,18 @@ use IQ2i\PrestashopWebservice\Http\Request\ListRequest;
 use IQ2i\PrestashopWebservice\Http\Request\SchemaRequest;
 use IQ2i\PrestashopWebservice\Http\Request\UpdateRequest;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
 
 class ClientTest extends TestCase
 {
-    private $client;
-
-    public function setUp(): void
-    {
-        $this->client = new Client([
-            'url' => 'http://localhost:8080/api/',
-            'key' => '6MBWZM37S6XCZXYT81GD6XD41SKZ14TP',
-        ]);
-    }
-
     public function testSchema()
     {
+        $client = $this->initClient('schema_categories.xml');
+
         $request = (new SchemaRequest('categories'))
             ->addQueryAttribute(new Schema(Schema::SYNOPSIS));
-        $response = $this->client->execute($request);
+        $response = $client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
         $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
@@ -50,8 +44,10 @@ class ClientTest extends TestCase
 
     public function testList()
     {
+        $client = $this->initClient('list_categories.xml');
+
         $request = new ListRequest('categories');
-        $response = $this->client->execute($request);
+        $response = $client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
         $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
@@ -62,9 +58,11 @@ class ClientTest extends TestCase
 
     public function testCreate()
     {
+        $client = $this->initClient('create_category.xml', 201);
+
         $request = (new CreateRequest('categories'))
-            ->setBody(file_get_contents(__DIR__.'/../fixtures/xml/create_category.xml'));
-        $response = $this->client->execute($request);
+            ->setBody(file_get_contents(__DIR__ . '/../fixtures/http/request/create_category.xml'));
+        $response = $client->execute($request);
 
         $this->assertEquals('201', $response->getStatusCode());
         $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
@@ -75,8 +73,10 @@ class ClientTest extends TestCase
 
     public function testGet()
     {
+        $client = $this->initClient('get_category.xml');
+
         $request = new GetRequest('categories', 2);
-        $response = $this->client->execute($request);
+        $response = $client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
         $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
@@ -87,9 +87,11 @@ class ClientTest extends TestCase
 
     public function testUpdate()
     {
-        $request = (new UpdateRequest('categories', 3))
-            ->setBody(file_get_contents(__DIR__.'/../fixtures/xml/update_category.xml'));
-        $response = $this->client->execute($request);
+        $client = $this->initClient('update_category.xml');
+
+        $request = (new UpdateRequest('categories', 10))
+            ->setBody(file_get_contents(__DIR__ . '/../fixtures/http/request/update_category.xml'));
+        $response = $client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
         $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
@@ -100,9 +102,11 @@ class ClientTest extends TestCase
 
     public function testUpdateInvalidResource()
     {
+        $client = $this->initClient('update_invalid_category.xml', 404);
+
         $request = (new UpdateRequest('categories', 99))
-            ->setBody(file_get_contents(__DIR__.'/../fixtures/xml/update_invalid_resource.xml'));
-        $response = $this->client->execute($request);
+            ->setBody(file_get_contents(__DIR__ . '/../fixtures/http/request/update_invalid_resource.xml'));
+        $response = $client->execute($request);
 
         $this->assertEquals('404', $response->getStatusCode());
         $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
@@ -113,8 +117,10 @@ class ClientTest extends TestCase
 
     public function testDelete()
     {
-        $request = new DeleteRequest('categories', 2);
-        $response = $this->client->execute($request);
+        $client = $this->initClient('delete_category.xml');
+
+        $request = new DeleteRequest('categories', 10);
+        $response = $client->execute($request);
 
         $this->assertEquals('200', $response->getStatusCode());
         $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
@@ -125,13 +131,33 @@ class ClientTest extends TestCase
 
     public function testDeleteInvalidResource()
     {
+        $client = $this->initClient('delete_invalid_category.xml', 404);
+
         $request = new DeleteRequest('categories', 99);
-        $response = $this->client->execute($request);
+        $response = $client->execute($request);
 
         $this->assertEquals('404', $response->getStatusCode());
         $this->assertContains('X-Powered-By: PrestaShop Webservice', $response->getHeaders());
 
         $content = $response->getContent();
         $this->assertEquals('Id(s) not exists: 99', $content['errors']['error']['message']);
+    }
+
+    private function initClient(string $bodyFilename, int $statusCode = 200): Client
+    {
+        $mockResponse = new MockResponse(file_get_contents(__DIR__.'/../fixtures/http/response/'.$bodyFilename), [
+            'http_code' => $statusCode,
+            'response_headers' => [
+                'PSWS-Version: 1.7.7.5',
+                'X-Powered-By: PrestaShop Webservice'
+            ],
+        ]);
+
+        return new Client([
+                'url' => 'http://localhost:8080/api/',
+                'key' => '6MBWZM37S6XCZXYT81GD6XD41SKZ14TP',
+            ],
+            new MockHttpClient($mockResponse, 'http://localhost:8080/api/')
+        );
     }
 }

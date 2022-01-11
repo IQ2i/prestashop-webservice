@@ -40,15 +40,11 @@ class Filter extends QueryAttribute
         self::CONTAINS,
     ];
 
-    private $field;
-    private $values;
-    private $operator;
-
-    /**
-     * @param array|string $values
-     */
-    public function __construct(string $field, $values, string $operator)
-    {
+    public function __construct(
+        private string $field,
+        private array|string $values,
+        private string $operator
+    ) {
         if (!in_array($operator, self::AVAILABLE_OPERATORS)) {
             throw new InvalidArgument(sprintf('Unknown operator %s.', $operator));
         }
@@ -56,10 +52,6 @@ class Filter extends QueryAttribute
         if (in_array($operator, self::SINGLE_VALUE_OPERATORS) && is_array($values)) {
             throw new InvalidArgument(sprintf('`values` must be a string when using %s operator.', $operator));
         }
-
-        $this->field = $field;
-        $this->values = $values;
-        $this->operator = $operator;
     }
 
     public function getField(): string
@@ -69,27 +61,14 @@ class Filter extends QueryAttribute
 
     public function getValue(): string
     {
-        switch ($this->operator) {
-            case self::OR:
-                return sprintf('[%s]', implode('|', $this->values));
-
-            case self::INTERVAL:
-                return sprintf('[%s]', implode(',', $this->values));
-
-            case self::LITERAL:
-                return sprintf('[%s]', $this->values);
-
-            case self::BEGIN:
-                return sprintf('[%s]%%', $this->values);
-
-            case self::END:
-                return sprintf('%%[%s]', $this->values);
-
-            case self::CONTAINS:
-                return sprintf('%%[%s]%%', $this->values);
-
-            default:
-                throw new InvalidArgument(\sprintf('Unknown operator "%s" used in filter.". ', $this->values));
-        }
+        return match ($this->operator) {
+            self::OR       => sprintf('[%s]', implode('|', $this->values)),
+            self::INTERVAL => sprintf('[%s]', implode(',', $this->values)),
+            self::LITERAL  => sprintf('[%s]', $this->values),
+            self::BEGIN    => sprintf('[%s]%%', $this->values),
+            self::END      => sprintf('%%[%s]', $this->values),
+            self::CONTAINS => sprintf('%%[%s]%%', $this->values),
+            default        => throw new InvalidArgument(\sprintf('Unknown operator "%s" used in filter.". ', $this->values)),
+        };
     }
 }

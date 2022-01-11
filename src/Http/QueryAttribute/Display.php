@@ -17,14 +17,9 @@ class Display extends QueryAttribute
 {
     public const FULL = 'full';
 
-    private $fields;
-
-    /**
-     * @param array|string $fields
-     */
-    public function __construct($fields)
-    {
-        $this->fields = $fields;
+    public function __construct(
+        private array|string $fields
+    ) {
     }
 
     public function getField(): string

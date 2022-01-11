@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+    <category>
+        <id_parent format="isUnsignedInt"></id_parent>
+        <level_depth read_only="true" format="isUnsignedInt" readOnly="true"></level_depth>
+        <nb_products_recursive notFilterable="true" read_only="true" readOnly="true"></nb_products_recursive>
+        <active required="true" format="isBool"></active>
+        <id_shop_default format="isUnsignedId"></id_shop_default>
+        <is_root_category format="isBool"></is_root_category>
+        <position></position>
+        <date_add format="isDate"></date_add>
+        <date_upd format="isDate"></date_upd>
+        <name required="true" maxSize="128" format="isCatalogName"><language id="1" xlink:href="http://localhost:8080/api/languages/1" format="isUnsignedId" ></language></name>
+        <link_rewrite required="true" maxSize="128" format="isLinkRewrite"><language id="1" xlink:href="http://localhost:8080/api/languages/1" format="isUnsignedId" ></language></link_rewrite>
+        <description format="isCleanHtml"><language id="1" xlink:href="http://localhost:8080/api/languages/1" format="isUnsignedId" ></language></description>
+        <meta_title maxSize="255" format="isGenericName"><language id="1" xlink:href="http://localhost:8080/api/languages/1" format="isUnsignedId" ></language></meta_title>
+        <meta_description maxSize="512" format="isGenericName"><language id="1" xlink:href="http://localhost:8080/api/languages/1" format="isUnsignedId" ></language></meta_description>
+        <meta_keywords maxSize="255" format="isGenericName"><language id="1" xlink:href="http://localhost:8080/api/languages/1" format="isUnsignedId" ></language></meta_keywords>
+        <associations>
+            <categories nodeType="category" api="categories">
+                <category>
+                    <id><![CDATA[]]></id>
+                </category>
+            </categories>
+            <products nodeType="product" api="products">
+                <product>
+                    <id><![CDATA[]]></id>
+                </product>
+            </products>
+        </associations>
+    </category>
+</prestashop>

@@ -20,11 +20,9 @@ use IQ2i\PrestashopWebservice\Http\QueryAttribute\Sort;
 
 class ListRequest extends Request
 {
-    private $resource;
-
-    public function __construct(string $resource)
-    {
-        $this->resource = $resource;
+    public function __construct(
+        private string $resource
+    ) {
     }
 
     public function getMethod(): string
