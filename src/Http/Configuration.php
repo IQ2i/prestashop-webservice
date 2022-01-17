@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Http;
 
-use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
+use IQ2i\PrestashopWebservice\Exception\InvalidArgumentException;
 
 class Configuration
 {
@@ -30,11 +30,11 @@ class Configuration
     public static function create(array $options): self
     {
         if (0 < count($invalidOptions = array_diff_key($options, self::AVAILABLE_OPTIONS))) {
-            throw new InvalidArgument(sprintf('Unknown option(s) "%s".', implode('", "', array_keys($invalidOptions))));
+            throw new InvalidArgumentException(sprintf('Unknown option(s) "%s".', implode('", "', array_keys($invalidOptions))));
         }
 
         if (0 < count($missingOptions = array_diff_key(self::AVAILABLE_OPTIONS, $options))) {
-            throw new InvalidArgument(sprintf('Missing required option(s) "%s".', implode('", "', array_keys($missingOptions))));
+            throw new InvalidArgumentException(sprintf('Missing required option(s) "%s".', implode('", "', array_keys($missingOptions))));
         }
 
         $configuration = new self();
@@ -47,7 +47,7 @@ class Configuration
     public function get(string $name): mixed
     {
         if (!isset(self::AVAILABLE_OPTIONS[$name])) {
-            throw new InvalidArgument(sprintf('Unknown option "%s".', $name));
+            throw new InvalidArgumentException(sprintf('Unknown option "%s".', $name));
         }
 
         return $this->data[$name];
@@ -56,7 +56,7 @@ class Configuration
     public function has(string $name): bool
     {
         if (!isset(self::AVAILABLE_OPTIONS[$name])) {
-            throw new InvalidArgument(sprintf('Unknown option "%s".', $name));
+            throw new InvalidArgumentException(sprintf('Unknown option "%s".', $name));
         }
 
         return isset($this->data[$name]);

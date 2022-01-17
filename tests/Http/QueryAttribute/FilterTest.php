@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Tests\Http\QueryAttribute;
 
-use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
+use IQ2i\PrestashopWebservice\Exception\InvalidArgumentException;
 use IQ2i\PrestashopWebservice\Http\QueryAttribute\Filter;
 use PHPUnit\Framework\TestCase;
 
@@ -57,13 +57,13 @@ class FilterTest extends TestCase
 
     public function testUnknownOperator()
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidArgumentException::class);
         new Filter('name', 'John', 'wrongoperator');
     }
 
     public function testWrongValueType()
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidArgumentException::class);
         new Filter('id', [1, 5], Filter::LITERAL);
     }
 }

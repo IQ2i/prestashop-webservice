@@ -13,6 +13,6 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Exception;
 
-class InvalidArgument extends \InvalidArgumentException implements Exception
+class InvalidArgumentException extends \InvalidArgumentException implements Exception
 {
 }

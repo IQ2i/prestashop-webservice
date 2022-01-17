@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Tests\Http\QueryAttribute;
 
-use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
+use IQ2i\PrestashopWebservice\Exception\InvalidArgumentException;
 use IQ2i\PrestashopWebservice\Http\QueryAttribute\Schema;
 use PHPUnit\Framework\TestCase;
 
@@ -27,7 +27,7 @@ class SchemaTest extends TestCase
 
     public function testUnknownType()
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidArgumentException::class);
         new Schema('wrongtype');
     }
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Http\QueryAttribute;
 
-use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
+use IQ2i\PrestashopWebservice\Exception\InvalidArgumentException;
 
 class Filter extends QueryAttribute
 {
@@ -46,11 +46,11 @@ class Filter extends QueryAttribute
         private string $operator
     ) {
         if (!in_array($operator, self::AVAILABLE_OPERATORS)) {
-            throw new InvalidArgument(sprintf('Unknown operator %s.', $operator));
+            throw new InvalidArgumentException(sprintf('Unknown operator %s.', $operator));
         }
 
         if (in_array($operator, self::SINGLE_VALUE_OPERATORS) && is_array($values)) {
-            throw new InvalidArgument(sprintf('`values` must be a string when using %s operator.', $operator));
+            throw new InvalidArgumentException(sprintf('`values` must be a string when using %s operator.', $operator));
         }
     }
 
@@ -68,7 +68,7 @@ class Filter extends QueryAttribute
             self::BEGIN    => sprintf('[%s]%%', $this->values),
             self::END      => sprintf('%%[%s]', $this->values),
             self::CONTAINS => sprintf('%%[%s]%%', $this->values),
-            default        => throw new InvalidArgument(\sprintf('Unknown operator "%s" used in filter.". ', $this->values)),
+            default        => throw new InvalidArgumentException(\sprintf('Unknown operator "%s" used in filter.". ', $this->values)),
         };
     }
 }

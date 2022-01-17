@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Http\QueryAttribute;
 
-use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
+use IQ2i\PrestashopWebservice\Exception\InvalidArgumentException;
 
 class Schema extends QueryAttribute
 {
@@ -29,7 +29,7 @@ class Schema extends QueryAttribute
         private string $type
     ) {
         if (!in_array($type, self::AVAILABLE_TYPES)) {
-            throw new InvalidArgument(sprintf('Unknown schema type %s.', $type));
+            throw new InvalidArgumentException(sprintf('Unknown schema type %s.', $type));
         }
     }
 

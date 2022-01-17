@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Http\QueryAttribute;
 
-use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
+use IQ2i\PrestashopWebservice\Exception\InvalidArgumentException;
 
 class Sort extends QueryAttribute
 {
@@ -29,7 +29,7 @@ class Sort extends QueryAttribute
         private array $fields
     ) {
         if (0 < count($invalidOrderBys = array_diff(array_values($fields), self::AVAILABLE_ORDER_BY))) {
-            throw new InvalidArgument(sprintf('Unknown order by(s) `%s`.', implode('`, `', array_keys($invalidOrderBys))));
+            throw new InvalidArgumentException(sprintf('Unknown order by(s) `%s`.', implode('`, `', array_keys($invalidOrderBys))));
         }
     }
 

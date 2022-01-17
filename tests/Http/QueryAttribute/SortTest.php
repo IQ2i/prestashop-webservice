@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Tests\Http\QueryAttribute;
 
-use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
+use IQ2i\PrestashopWebservice\Exception\InvalidArgumentException;
 use IQ2i\PrestashopWebservice\Http\QueryAttribute\Sort;
 use PHPUnit\Framework\TestCase;
 
@@ -33,7 +33,7 @@ class SortTest extends TestCase
 
     public function testUnknownOrderBy()
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidArgumentException::class);
         new Sort(['field1' => 'test']);
     }
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\PrestashopWebservice\Tests\Http;
 
-use IQ2i\PrestashopWebservice\Exception\InvalidArgument;
+use IQ2i\PrestashopWebservice\Exception\InvalidArgumentException;
 use IQ2i\PrestashopWebservice\Http\Configuration;
 use PHPUnit\Framework\TestCase;
 
@@ -32,14 +32,14 @@ class ConfigurationTest extends TestCase
 
     public function testCreateWithMissingOption()
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidArgumentException::class);
 
         Configuration::create(['url' => self::OPTION_URL]);
     }
 
     public function testCreateWithUnknownOption()
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidArgumentException::class);
 
         Configuration::create(['url' => self::OPTION_URL, 'foo' => self::OPTION_KEY]);
     }
@@ -53,7 +53,7 @@ class ConfigurationTest extends TestCase
 
     public function testHasWithUnknownOption()
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $configuration = Configuration::create(['url' => self::OPTION_URL, 'key' => self::OPTION_KEY]);
 
@@ -69,7 +69,7 @@ class ConfigurationTest extends TestCase
 
     public function testGetWithUnknownOption()
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $configuration = Configuration::create(['url' => self::OPTION_URL, 'key' => self::OPTION_KEY]);
 
