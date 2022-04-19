@@ -1,0 +1,68 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * This file is part of the PrestashopWebservice package.
+ *
+ * (c) Loïc Sapone <loic@sapone.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use IQ2i\PrestashopWebservice\Console\Application;
+
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+
+set_error_handler(static function ($severity, $message, $file, $line) {
+    if ($severity & error_reporting()) {
+        throw new ErrorException($message, 0, $severity, $file, $line);
+    }
+});
+
+// check environment requirements
+(function () {
+    if (!defined('PHP_VERSION_ID')) { // PHP_VERSION_ID is available as of PHP 5.2.7
+        fwrite(STDERR, 'PHP version no supported, please update. Current PHP version: '.PHP_VERSION.".\n");
+        exit(1);
+    } elseif (
+        \PHP_VERSION_ID < 80002
+        || \PHP_VERSION_ID >= 80200
+    ) {
+        fwrite(STDERR, "PHP needs to be a minimum version of PHP 8.0.2 and maximum version of PHP 8.1.*.\n");
+        fwrite(STDERR, 'Current PHP version: '.PHP_VERSION.".\n");
+        exit(1);
+    }
+
+    foreach (['curl', 'simplexml'] as $extension) {
+        if (!extension_loaded($extension)) {
+            fwrite(STDERR, sprintf("PHP extension ext-%s is missing from your system. Install or enable it.\n", $extension));
+            exit(1);
+        }
+    }
+})();
+
+// load dependencies
+(function () {
+    $possibleFiles = [__DIR__.'/../../autoload.php', __DIR__.'/../autoload.php', __DIR__.'/vendor/autoload.php'];
+    $file = null;
+    foreach ($possibleFiles as $possibleFile) {
+        if (file_exists($possibleFile)) {
+            $file = $possibleFile;
+
+            break;
+        }
+    }
+
+    if (null === $file) {
+        throw new RuntimeException('Unable to locate autoload.php file.');
+    }
+
+    require_once $file;
+})();
+
+
+$application = new Application();
+$application->run();
+
+__HALT_COMPILER();

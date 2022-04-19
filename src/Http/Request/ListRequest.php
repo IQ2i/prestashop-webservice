@@ -21,7 +21,7 @@ use IQ2i\PrestashopWebservice\Http\QueryAttribute\Sort;
 class ListRequest extends Request
 {
     public function __construct(
-        private string $resource
+        private ?string $resource = null
     ) {
     }
 
@@ -32,7 +32,7 @@ class ListRequest extends Request
 
     public function getUri(): string
     {
-        return $this->resource;
+        return $this->resource ?? '';
     }
 
     public function getAvailableQueryAttributes(): array
